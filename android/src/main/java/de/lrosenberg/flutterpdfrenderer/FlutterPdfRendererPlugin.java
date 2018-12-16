@@ -117,13 +117,15 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
         // Now render the page onto the Bitmap.
         mCurrentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
 
+        if (null != mCurrentPage) {
+            mCurrentPage.close();
+            mCurrentPage = null;
+        }
+
         return bitmap;
     }
 
     private void closeRenderer() throws IOException {
-        if (null != mCurrentPage) {
-            mCurrentPage.close();
-        }
         mPdfRenderer.close();
         mFileDescriptor.close();
     }

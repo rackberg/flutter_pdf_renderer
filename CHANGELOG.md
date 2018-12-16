@@ -1,3 +1,6 @@
+## 1.0.3
+* Fixed already closed error
+
 ## 1.0.2
 * Fixed a typo in the description.
 
