@@ -1,6 +1,6 @@
 name: flutter_pdf_renderer
-description: Flutter Plugin to render a PDF file.
-version: 1.0.0
+description: Flutter Plugin to render PDF files on Android devices (iOS will be comming soon).
+version: 1.0.1
 author: Lars Rosenberg <larsrosenberg88@gmail.com>
 homepage: https://github.com/rackberg/flutter_pdf_renderer
 

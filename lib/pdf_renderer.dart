@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdf_renderer/flutter_pdf_renderer.dart';
 
+/// Displays the requested [page] of a [pdfFile] stored on the device.
 class PdfRenderer extends StatefulWidget {
   final String pdfFile;
   final int page;

@@ -9,6 +9,9 @@ class FlutterPdfRenderer {
   static const MethodChannel _channel =
       MethodChannel('rackberg.flutter_pdf_renderer');
 
+  /// Sends the [pdfFile] to the platform which then renders it.
+  ///
+  /// If you omit the [page] parameter, the first page will be rendered by default.
   static Future<File> renderPdf({
     @required String pdfFile,
     int page: 0,

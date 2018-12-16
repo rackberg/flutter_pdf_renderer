@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pdf_renderer_example/pdf_renderer.dart';
+import 'package:flutter_pdf_renderer/pdf_renderer.dart';
 
 void main() => runApp(MyApp());
 
