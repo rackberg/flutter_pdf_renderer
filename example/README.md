@@ -2,15 +2,25 @@
 
 Demonstrates how to use the flutter_pdf_renderer plugin.
 
-## Getting Started
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_pdf_renderer_example/pdf_renderer.dart';
 
-This project is a starting point for a Flutter application.
+void main() => runApp(MyApp());
 
-A few resources to get you started if this is your first Flutter project:
+class MyApp extends StatelessWidget {
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('PdfRenderer example app'),
+        ),
+        body: PdfRenderer(pdfFile: 'assets/sample.pdf', page: 0),
+      ),
+    );
+  }
+}
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
