@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import io.flutter.plugin.common.MethodCall;
@@ -48,8 +50,7 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
         if (call.method.equals("renderPdf")) {
             try {
                 String path = call.argument("path");
-                int page = call.<Integer>argument("page");
-                result.success(renderPdf(path, page));
+                result.success(renderPdf(path));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,18 +59,32 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private String renderPdf(String filePath, int page) throws IOException {
-        openRenderer(registrar.context(), registrar.lookupKeyForAsset(filePath));
-        Bitmap bitmap = createBitmapOfPage(page);
+    private List<String> renderPdf(String filePath) throws IOException {
+        PdfRenderer renderer = openRenderer(registrar.context(), registrar.lookupKeyForAsset(filePath));
+        if (renderer == null) {
+            return new ArrayList<>();
+        }
+
+        List<Bitmap> bitmaps = new ArrayList<>();
+        int count = renderer.getPageCount();
+        for (int i = 0; i < count; i++) {
+            Bitmap bitmap = createBitmapOfPage(i);
+            if (bitmap != null) {
+                bitmaps.add(bitmap);
+            }
+        }
         closeRenderer();
 
-        // Send bitmap to flutter
-        assert bitmap != null;
-        return saveBitmap(bitmap);
+        // Send bitmaps to flutter
+        List<String> list = new ArrayList<>();
+        for (Bitmap bitmap : bitmaps) {
+            String s = saveBitmap(bitmap);
+            list.add(s);
+        }
+        return list;
     }
 
-    private void openRenderer(Context context, String fileName) throws IOException {
+    private PdfRenderer openRenderer(Context context, String fileName) throws IOException {
         File file = new File(context.getCacheDir(), generateRandomFilename() + ".pdf");
         Log.d("openRenderer", "created file: " + file);
         if (!file.exists()) {
@@ -94,8 +109,10 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
 
         mFileDescriptor = ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_ONLY);
         if (mFileDescriptor != null) {
-            mPdfRenderer = new PdfRenderer(mFileDescriptor);
+            return mPdfRenderer = new PdfRenderer(mFileDescriptor);
         }
+
+        return null;
     }
 
     private Bitmap createBitmapOfPage(int index) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pdf_renderer/pdf_renderer.dart';
+import 'package:flutter_pdf_renderer/flutter_pdf_renderer.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('PdfRenderer example app'),
         ),
-        body: PdfRenderer(pdfFile: 'assets/sample.pdf', page: 0),
+        body: PdfRenderer(pdfFile: 'assets/sample.pdf'),
       ),
     );
   }
