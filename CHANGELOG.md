@@ -1,3 +1,6 @@
+## 1.1.1
+* Fixed example
+
 ## 1.1.0
 * Rendering pages of PDF file using PageView.
 * Fixed path to the PdfRenderer Widget.
