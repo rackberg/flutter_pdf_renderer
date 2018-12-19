@@ -1,3 +1,8 @@
+## 1.1.0
+* Rendering pages of PDF file using PageView.
+* Fixed path to the PdfRenderer Widget.
+* Added full native support for iOS.
+
 ## 1.0.3
 * Fixed already closed error
 
