@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('PdfRenderer example app'),
         ),
-        body: PdfRenderer(pdfFile: 'assets/sample.pdf'),
+        body: PdfRenderer(pdfFile: 'assets/sample.pdf', width: 500.0),
       ),
     );
   }

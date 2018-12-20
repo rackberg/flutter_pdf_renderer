@@ -1,3 +1,6 @@
+## 1.2.0
+* Added required parameter for the width to prevent a missing size flutter error when using the PageView widget.
+
 ## 1.1.1
 * Fixed example
 

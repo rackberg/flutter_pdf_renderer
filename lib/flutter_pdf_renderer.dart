@@ -30,42 +30,41 @@ class FlutterPdfRenderer {
 /// Displays the pages of a [pdfFile] stored on the device.
 class PdfRenderer extends StatefulWidget {
   final String pdfFile;
+  final double width;
 
-  PdfRenderer({@required this.pdfFile});
+  PdfRenderer({@required this.pdfFile, @required this.width});
 
   @override
   State<StatefulWidget> createState() => _PdfRendererState();
 }
 
 class _PdfRendererState extends State<PdfRenderer> {
-  Future<List<File>> _pdfImages;
+  List<File> files;
+
+  void _renderPdf() async {
+    final result = await FlutterPdfRenderer.renderPdf(pdfFile: widget.pdfFile);
+    setState(() {
+      files = result;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    _pdfImages = FlutterPdfRenderer.renderPdf(
-        pdfFile: widget.pdfFile);
+    _renderPdf();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<File>>(
-        future: _pdfImages,
-        builder: (BuildContext context, AsyncSnapshot<List<File>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data != null) {
-            return PageView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
-                  return Image.file(snapshot.data[index]);
-                }
-            );
-          } else if (snapshot.error != null) {
-            return Text('Error rendering pdf file!');
-          } else {
-            return Text('No pdf data received.');
-          }
-        });
+    if (files != null) {
+      return SizedBox(
+        height: widget.width,
+        child: PageView(
+          children: files.map((f) => Image.file(f)).toList(),
+        ),
+      );
+    }
+
+    return Container();
   }
 }
-

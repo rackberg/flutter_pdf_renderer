@@ -1,8 +1,6 @@
 # flutter_pdf_renderer
 
-Flutter Plugin to render a PDF file. Currently supports Android only.
-
-iOS support will be available soon.
+Flutter Plugin to render a PDF file. Supports both Android and iOS.
 
 ## Getting Started
 In your flutter project add the dependency:
