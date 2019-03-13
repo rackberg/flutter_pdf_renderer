@@ -1,3 +1,6 @@
+## 1.3.1
+* Added iOS support for rendering a pdf file from an absolute path.
+
 ## 1.3.0
 * Added the ability to provide an absolute path to where the pdf file to render is stored. This allows now to render a pdf document that was downloaded at runtime (Android only!).
 
