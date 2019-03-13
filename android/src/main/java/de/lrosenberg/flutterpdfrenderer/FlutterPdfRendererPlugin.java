@@ -9,9 +9,9 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -60,7 +60,8 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
     }
 
     private List<String> renderPdf(String filePath) throws IOException {
-        PdfRenderer renderer = openRenderer(registrar.context(), registrar.lookupKeyForAsset(filePath));
+        //PdfRenderer renderer = openRenderer(registrar.context(), registrar.lookupKeyForAsset(filePath));
+        PdfRenderer renderer = openRenderer(registrar.context(), filePath);
         if (renderer == null) {
             return new ArrayList<>();
         }
@@ -88,9 +89,9 @@ public class FlutterPdfRendererPlugin implements MethodCallHandler {
         File file = new File(context.getCacheDir(), generateRandomFilename() + ".pdf");
         Log.d("openRenderer", "created file: " + file);
         if (!file.exists()) {
-            InputStream asset;
+            FileInputStream asset;
             try {
-                asset = context.getAssets().open(fileName);
+                asset = new FileInputStream(new File(fileName));
                 FileOutputStream output = null;
                 output = new FileOutputStream(file);
                 final byte[] buffer = new byte[1024];

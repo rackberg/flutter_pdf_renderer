@@ -1,3 +1,6 @@
+## 1.3.0
+* Added the ability to provide an absolute path to where the pdf file to render is stored. This allows now to render a pdf document that was downloaded at runtime (Android only!).
+
 ## 1.2.0
 * Added required parameter for the width to prevent a missing size flutter error when using the PageView widget.
 
