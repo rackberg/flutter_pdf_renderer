@@ -1,3 +1,6 @@
+## 1.3.2
+* Added missing SWIFT_VERSION 4.2 to pod spec file for ios devices. (Thanks to [@qinwenshi](https://github.com/qinwenshi/flutter_pdf_renderer))
+
 ## 1.3.1
 * Added iOS support for rendering a pdf file from an absolute path.
 
