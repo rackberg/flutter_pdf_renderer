@@ -6,12 +6,11 @@ import 'package:flutter/services.dart';
 
 class FlutterPdfRenderer {
   static const MethodChannel _channel =
-  MethodChannel('rackberg.flutter_pdf_renderer');
+      MethodChannel('rackberg.flutter_pdf_renderer');
 
   /// Sends the [pdfFile] to the platform which then renders it.
   static Future<List<File>> renderPdf({String pdfFile}) async {
-    final result =
-    await _channel.invokeMethod('renderPdf', <String, dynamic>{
+    final result = await _channel.invokeMethod('renderPdf', <String, dynamic>{
       'path': pdfFile,
     });
 
