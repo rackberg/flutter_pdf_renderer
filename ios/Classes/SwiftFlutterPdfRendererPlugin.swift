@@ -66,7 +66,7 @@ public class SwiftFlutterPdfRendererPlugin: NSObject, FlutterPlugin {
     }
     
     private func storeImageToTemporaryDirectory(image: UIImage) -> URL? {
-        guard let data = image.pngData() else {
+        guard let data = UIImagePNGRepresentation(image) else {
             return nil
         }
         let fileURL = TemporaryFileURL(extension: "pdf")
